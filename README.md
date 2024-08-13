@@ -13,3 +13,8 @@ MIRU2024でのポスター発表であった**Sigmoid AttentionによるAttentio
 cd Sigmoid_Attention_ViT
 python3 src/load_pretrained.py 
 ```
+timmライブラリのソースコード/重みパラメータを使用したローカルでの動作確認は，`local_model_test.py`を実行．
+
+## Sigmoid Attention
+論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，その上でHuman in the loopによるAttentionの修正を行う．
+そして，逆Sigmoid関数に通すことで，元のlogitの値へと再変換する．これにより，ユーザーが内積値のlogitではなく0-1の範囲で修正が可能となり，Softmaxの前での処理のため，Attention Weightの行方向の和が1であることも担保される．
