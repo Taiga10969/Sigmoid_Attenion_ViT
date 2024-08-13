@@ -1,5 +1,4 @@
 import os
-import timm
 import torch
 import argparse
 from timm.models import create_model
