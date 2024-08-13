@@ -7,8 +7,8 @@ MIRU2024でのポスター発表であった**Sigmoid AttentionによるAttentio
 使用するモデルは，論文同様`ViT-Small/16`を使用する．<br>
 ソースコードや事前学習済みの重みは，timmライブラリで公開されているものを活用する．
 ### 環境構築/モデルの準備
-以下のコマンドを実行してtimmで公開されている事前学習済みのモデルの重みをローカルに保存します．<br>
-デフォルトの保存先は，`models/vit_small_patch16_224.pt`です．
+以下のコマンドを実行してtimmで公開されている事前学習済みのモデルの重みをローカルに保存する．<br>
+デフォルトの保存先は，`models/vit_small_patch16_224.pt`である．optionで`--model_name`，`--save_dir`でtimmのモデル名と重みの保存先を指定可能．
 ```
 cd Sigmoid_Attention_ViT
 pip install -r requirements.txt
