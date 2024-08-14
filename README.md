@@ -35,3 +35,20 @@ bash run_vit_training.sh
 ```
 ⚠️この時，`run_vit_training.sh`の設定値でwandbをtrueにすることでwandbで学習経過を確認できる．(WANDB_KEYにAPIキーを指定してください．)<br>
 学習結果は，`./result`に保存されます．
+- CIFAR-10の学習設定例
+```
+# ViT-Trainingの設定
+PROJECTS_NAME="Sigmoid_ViT_Training"
+RUNS_NAME="cifar10_FT"
+DATASET="cifar10"
+BATCH_SIZE=512
+MODEL_NAME="vit_small_patch16_224"
+IMG_SIZE=224
+IS_DATAPARALLEL=false
+LR=1e-4
+OPT="adam"
+EPOCHS=10
+WANDB=true
+WANDB_KEY="your_wandb_api_key"
+```
+NVIDIA RTX 6000Ada GPU 1枚で動作可能であることを確認済みです．（Memory-Usage:33401MiB）
