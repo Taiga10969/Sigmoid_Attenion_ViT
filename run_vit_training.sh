@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ViT-Trainingの設定
-PROJECTS_NAME="ViT-Training"
+PROJECTS_NAME="Sigmoid_ViT_Training"
 RUNS_NAME="cifar10_FT"
 DATASET="cifar10"
 BATCH_SIZE=512
