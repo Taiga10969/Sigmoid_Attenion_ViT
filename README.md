@@ -24,3 +24,14 @@ CIFAR-10データセットでのViT学習時には，自動的にダウンロー
 ## Sigmoid Attention
 論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，その上でHuman in the loopによるAttentionの修正を行う．
 そして，逆Sigmoid関数に通すことで，元のlogitの値へと再変換する．これにより，ユーザーが内積値のlogitではなく0-1の範囲で修正が可能となり，Softmaxの前での処理のため，Attention Weightの行方向の和が1であることも担保される．
+
+
+## 学習(NOT Human in the loop)
+Human in the loopによる精度向上を行う前に，通常のViTのモデルをFTして精度を確認する．
+### CIFAR-10
+CIFAR-10データセットを用いた10クラス分類タスクでのFTは以下のコマンドで行う．
+```
+bash run_vit_training.sh
+```
+⚠️この時，`run_vit_training.sh`の設定値でwandbをtrueにすることでwandbで学習経過を確認できる．(WANDB_KEYにAPIキーを指定してください．)<br>
+学習結果は，`./result`に保存されます．
