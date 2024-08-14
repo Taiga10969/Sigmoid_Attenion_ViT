@@ -13,6 +13,8 @@ import torch.optim as optim
 from timm.models import create_model
 import torchvision.transforms as transforms
 
+from models.sigmoid_attention import Sigmoid_Attention
+
 
 parser = argparse.ArgumentParser(description='ViT-Training')
 parser.add_argument('--projects_name', type=str, default="ViT-Training")
@@ -116,9 +118,11 @@ transform_test = transforms.Compose([
 
 if args.dataset == "cifar10":
     trainset = torchvision.datasets.CIFAR10(root='./data', train=True, download=True, transform=transform_train)
+    print(f"dataset : {trainset}\nlen(trainset) : {len(trainset)}")
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=args.batch_size, shuffle=True, num_workers=8)
     
     testset = torchvision.datasets.CIFAR10(root='./data', train=False, download=True, transform=transform_test)
+    print(f"dataset : {testset}\nlen(trainset) : {len(testset)}")
     testloader = torch.utils.data.DataLoader(testset, batch_size=args.batch_size, shuffle=False, num_workers=8)
 
 elif args.dataset == "cub200":
@@ -128,6 +132,13 @@ elif args.dataset == "cub200":
 
 # Model の定義 ==============================================================
 model = create_model(args.model_name, pretrained=True, num_classes=10)
+# replace
+model.blocks[-1].attn = Sigmoid_Attention(dim=384, num_heads=6, qkv_bias=True)
+
+state_dict = torch.load('./models/vit_small_patch16_224.pt', map_location=torch.device('cpu'), weights_only=True)
+msg = model.load_state_dict(state_dict)
+print("model.load_state_dict msg : ", msg)
+
 model = model.to(device)
 
 if args.is_DataParallel == True:
@@ -233,15 +244,15 @@ for epoch in range(args.epochs):
             torch.save(model.module.state_dict(), os.path.join(save_dir, f'best_acc.pt'))
         else:
             torch.save(model.state_dict(), os.path.join(save_dir, f'best_acc.pt'))
-        print(f"Epoch{epoch+1} [info] : save best_acc.pt")
+        print(f"Epoch{epoch} [info] : save best_acc.pt")
     
-    content = time.ctime() + ' ' + f'Epoch {epoch}, lr: {optimizer.param_groups[0]["lr"]:.7f}, val loss: {test_loss:.5f}, acc: {acc:.5f}'
+    content = time.ctime() + ' ' + f'Epoch {epoch}, lr: {optimizer.param_groups[0]["lr"]:.7f}, val loss: {testloss:.5f}, acc: {acc:.5f}'
     print(content)
 
     with open(os.path.join(save_dir,'train_log.txt'), 'a') as appender:
         appender.write(content + "\n")
     
-    scheduler.step(epoch)
+    scheduler.step()
 
     train_loss_list.append(trainloss)
     test_loss_list.append(testloss)
