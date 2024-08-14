@@ -11,9 +11,11 @@ from tqdm import tqdm
 import torch.nn as nn
 import torch.optim as optim
 from timm.models import create_model
+from torch.nn.utils import clip_grad_norm_
 import torchvision.transforms as transforms
 
 from models.sigmoid_attention import Sigmoid_Attention
+#from models.my_optim import CosineAnnealingLR
 
 
 parser = argparse.ArgumentParser(description='ViT-Training')
@@ -30,6 +32,8 @@ parser.add_argument('--epochs', type=int, default=50)
 parser.add_argument('--wandb', action='store_true')
 parser.add_argument('--wandb_key', type=str, default="")
 
+parser.add_argument('--pretrained', action='store_false') #--pretrainedを渡すとFalseになる
+
 args = parser.parse_args()
 
 
@@ -38,6 +42,7 @@ def fix_seeds(seed=0):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.benchmark = False
     torch.backends.cudnn.deterministic = True
 fix_seeds(99)
@@ -131,13 +136,15 @@ elif args.dataset == "cub200":
 
 
 # Model の定義 ==============================================================
-model = create_model(args.model_name, pretrained=True, num_classes=10)
+model = create_model(args.model_name, pretrained=args.pretrained, num_classes=10)
 # replace
 model.blocks[-1].attn = Sigmoid_Attention(dim=384, num_heads=6, qkv_bias=True)
 
-state_dict = torch.load('./models/vit_small_patch16_224.pt', map_location=torch.device('cpu'), weights_only=True)
-msg = model.load_state_dict(state_dict)
-print("model.load_state_dict msg : ", msg)
+
+if args.pretrained:
+    state_dict = torch.load('./models/vit_small_patch16_224.pt', map_location=torch.device('cpu'), weights_only=True)
+    msg = model.load_state_dict(state_dict)
+    print("model.load_state_dict msg : ", msg)
 
 model = model.to(device)
 
@@ -155,6 +162,12 @@ elif args.opt == "sgd":
     optimizer = optim.SGD(model.parameters(), lr=args.lr)
 
 scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.epochs)
+
+#scheduler = CosineAnnealingLR(optimizer,
+#                              max_epochs=args.epochs,
+#                              warmup_epochs=8,
+#                              warmup_start_lr=0,
+#                              eta_min=0)
 
 # 学習 =======================================================================================
 
@@ -185,6 +198,10 @@ for epoch in range(args.epochs):
 
             optimizer.zero_grad()
             loss.backward()
+
+            # 勾配クリップを追加
+            clip_grad_norm_(model.parameters(), max_norm=1.0)
+
             optimizer.step()
 
             train_loss += loss.item()
