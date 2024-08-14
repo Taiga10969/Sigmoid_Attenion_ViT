@@ -43,8 +43,11 @@ class Sigmoid_Attention(nn.Module):
 
         sigmoid_att = torch.sigmoid(attn)
         inverse_sigmoid_att = torch.log(sigmoid_att / (1 - sigmoid_att))
+        
+        # STE : backward()のみ，inverse_sigmoid_attを考慮しないようにする!!
+        attn_ = attn + (inverse_sigmoid_att - attn).detach()
 
-        attn = inverse_sigmoid_att.softmax(dim=-1)
+        attn = attn_.softmax(dim=-1)
         attn = self.attn_drop(attn)
         x = attn @ v
 
