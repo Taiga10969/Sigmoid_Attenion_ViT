@@ -18,8 +18,10 @@ timmライブラリのソースコード/重みパラメータを使用したロ
 
 ### Datasetの準備
 データセットは，CIFAR-10と[CUB_200](https://www.vision.caltech.edu/datasets/cub_200_2011/)を使用する．
+<!-- 
 CIFAR-10データセットでのViT学習時には，自動的にダウンロードされるようになっているが，CUB_200の学習には，事前にデータセットをダウンロードしておく必要がある．<br>
 [ここ](https://data.caltech.edu/records/65de6-vp158)からデータセットをダウンロードして任意の場所に保存してください．
+-->
 
 ## Sigmoid Attention
 論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，その上でHuman in the loopによるAttentionの修正を行う．
@@ -52,3 +54,30 @@ WANDB=true
 WANDB_KEY="your_wandb_api_key"
 ```
 NVIDIA RTX 6000Ada GPU 1枚で動作可能であることを確認済みです．（Memory-Usage:33401MiB）
+
+### CUB_200
+CUB_200データセットを用いた200クラス分類タスクでのFTもCIFAR-10と同様のコマンドで行う．<br>
+このとき，`run_vit_training.sh`の設定値を以下のように変更してから学習を行う．<br>
+学習結果は，`./result`に保存されます．
+- CIFAR-10の学習設定例
+```
+# ViT-Trainingの設定
+PROJECTS_NAME="Sigmoid_ViT_Training"
+RUNS_NAME="cub200_FT"
+DATASET="cub200"
+DATASET_PATH="your_path/dataset/cub200"
+BATCH_SIZE=128
+MODEL_NAME="vit_small_patch16_224"
+IMG_SIZE=224
+IS_DATAPARALLEL=false
+LR=1e-5
+OPT="adam"
+EPOCHS=500
+WANDB=true
+WANDB_KEY="your_wandb_api_key"
+```
+
+## 学習結果の確認
+学習結果の確認は，`result.ipynb`を実行することで，テストデータにおける正解率による評価と，サンプルデータにおけるAttentionを用いた判断根拠の可視化による評価を行っている．<br>
+このファイルを実行すると，`./result./result%Y%m%d_%H%M`の形式で結果画像が保存されます．
+
