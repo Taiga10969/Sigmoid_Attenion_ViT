@@ -76,8 +76,17 @@ EPOCHS=500
 WANDB=true
 WANDB_KEY="your_wandb_api_key"
 ```
-
 ## 学習結果の確認
 学習結果の確認は，`result.ipynb`を実行することで，テストデータにおける正解率による評価と，サンプルデータにおけるAttentionを用いた判断根拠の可視化による評価を行っている．<br>
 このファイルを実行すると，`./result./result%Y%m%d_%H%M`の形式で結果画像が保存されます．
 
+## `./models/vit.py`について
+このファイルは，timmで提供されているVision Transformerクラスを基に以下の機能を追加したクラスである．<br>
+このクラスの重み等は，基のtimmで提供されているものをそのまま使用可能である．モデルの読み込みには，model_configを用いて直接インスタンス化する形で行う．<br>
+#### 変更点
+- **Attention Weightの出力**
+  - `forward()`時に`output_attentions=True`を渡すことで，各層のAttention Weightが出力される．
+  - さらに，`only_Sigmoid=True`を渡すことで，最終層のAttention Weightのみ出力します．これは，学習時などにメモリ使用量を減らすために使用する．
+- **Attentionの修正機構**
+  - Attentionを修正して推論を行うために，Sigmoid Attention(最終層)のみのAttentionを操作できるように変更した．
+  - 操作するAttentionの情報は，`forward()`時に`attn_info=`に変更情報を渡す．
