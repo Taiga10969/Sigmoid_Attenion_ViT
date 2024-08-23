@@ -1,5 +1,5 @@
 # Sigmoid_Attenion_ViT
-MIRU2024でのポスター発表であった**Sigmoid AttentionによるAttentionの修正機構を導入したDINOの提案及びHuman in the loopによる精度向上の試み**の論文の再現実装を行う．<br>
+MIRU2024でのポスター発表であった論文：**Sigmoid AttentionによるAttentionの修正機構を導入したDINOの提案及びHuman in the loopによる精度向上の試み**の再現実装を行う．<br>
 論文では，DINOによる自己教師あり学習手法による評価実験を行なっており，独自の工業製品画像のデータセットを使用している(論文3.1).<br>
 そこで，CIFAR-10のような一般的な画像での有効性の確認を行う．CIFAR-10はラベル付きのデータセットであるため，学習法はDINOではなく，通常の教師あり学習として学習する．<br>
 
