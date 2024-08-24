@@ -28,7 +28,7 @@ CIFAR-10データセットでのViT学習時には，自動的にダウンロー
 そして，逆Sigmoid関数に通すことで，元のlogitの値へと再変換する．これにより，ユーザーが内積値のlogitではなく0-1の範囲で修正が可能となり，Softmaxの前での処理のため，Attention Weightの行方向の和が1であることも担保される．
 
 
-## 学習(NOT Human in the loop)
+## Step1：学習(NOT Human in the loop)
 Human in the loopによる精度向上を行う前に，通常のViTのモデルをFTして精度を確認する．
 ### CIFAR-10
 CIFAR-10データセットを用いた10クラス分類タスクでのFTは以下のコマンドで行う．
@@ -76,11 +76,11 @@ EPOCHS=500
 WANDB=true
 WANDB_KEY="your_wandb_api_key"
 ```
-## 学習結果の確認
+### 学習結果の確認
 学習結果の確認は，`result.ipynb`を実行することで，テストデータにおける正解率による評価と，サンプルデータにおけるAttentionを用いた判断根拠の可視化による評価を行っている．<br>
 このファイルを実行すると，`./result./result%Y%m%d_%H%M`の形式で結果画像が保存されます．
 
-## `./models/vit.py`について
+### `./models/vit.py`について
 このファイルは，timmで提供されているVision Transformerクラスを基に以下の機能を追加したクラスである．<br>
 モデルの読み込みには，model_configを用いて直接インスタンス化する形で行う．この時，モデルのパラメータは乱数によって初期化されたものになるため，学習済みのモデルパラメータなどを別途読み込む必要がある．このクラスの重み等は，基のtimmで提供されているものをそのまま使用可能である．パラメータの読み込みは，**環境構築/モデルの準備**で保存した`.pt`ファイルを読み込むことでtimmから読み込んだものと同様になる．<br>
 #### 変更点
@@ -90,3 +90,5 @@ WANDB_KEY="your_wandb_api_key"
 - **Attentionの修正機構**
   - Attentionを修正して推論を行うために，Sigmoid Attention(最終層)のみのAttentionを操作できるように変更した．
   - 操作するAttentionの情報は，`forward()`時に`attn_info=`に変更情報を渡す．
+
+## Step2:HITL学習(Human in the loop)
