@@ -28,7 +28,7 @@ CIFAR-10データセットでのViT学習時には，自動的にダウンロー
 そして，逆Sigmoid関数に通すことで，元のlogitの値へと再変換する．これにより，ユーザーが内積値のlogitではなく0-1の範囲で修正が可能となり，Softmaxの前での処理のため，Attention Weightの行方向の和が1であることも担保される．
 
 
-## Step1：学習(NOT Human in the loop)
+## Step1：学習(NOT Human in the loop)⚠️この先現在コード整理中（非公開）
 Human in the loopによる精度向上を行う前に，通常のViTのモデルをFTして精度を確認する．
 ### CIFAR-10
 CIFAR-10データセットを用いた10クラス分類タスクでのFTは以下のコマンドで行う．
