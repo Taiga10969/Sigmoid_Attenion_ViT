@@ -19,7 +19,7 @@ timmライブラリのソースコード/重みパラメータを使用したロ
 ### Datasetの準備
 データセットは，CIFAR-10と[~~CUB_200_2010~~](https://www.vision.caltech.edu/datasets/cub_200_2010/)と[CUB_200_2011](https://www.vision.caltech.edu/datasets/cub_200_2011/)を使用する．<br>
 ※CUB_200_2010データセットは，対応するBubbleデータが非公開であるため，再現はBubbleデータを持っている場合のみ実行可能である．<br>
-CIFAR-10データセットでのViT学習時には，自動的にダウンロードされるようになっているが，CUB_200_2010の学習には，事前にデータセットをダウンロードしておく必要がある．<br>
+CIFAR-10データセットでのViT学習時には，自動的にダウンロードされるようになっているが，~~CUB_200_2010~~とCUB_200_2011の学習には，事前にデータセットをダウンロードしておく必要がある．<br>
 [ここ](https://data.caltech.edu/records/65de6-vp158)からデータセットをダウンロードして任意の場所に保存する<br>
 また，対応するBubbleデータは，[ここ](https://github.com/yaorong0921/CUB-GHA)からダウンロードして任意の場所に保存する．
 
