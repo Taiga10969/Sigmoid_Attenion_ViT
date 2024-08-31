@@ -17,11 +17,18 @@ python3 src/load_pretrained.py
 timmライブラリのソースコード/重みパラメータを使用したローカルでの動作確認は，`local_model_test.py`を実行．
 
 ### Datasetの準備
-データセットは，CIFAR-10と[~~CUB_200_2010~~](https://www.vision.caltech.edu/datasets/cub_200_2010/)と[CUB_200_2011](https://www.vision.caltech.edu/datasets/cub_200_2011/)を使用する．
-<!-- 
+データセットは，CIFAR-10と[~~CUB_200_2010~~](https://www.vision.caltech.edu/datasets/cub_200_2010/)と[CUB_200_2011](https://www.vision.caltech.edu/datasets/cub_200_2011/)を使用する．<br>
+※CUB_200_2010データセットは，対応するBubbleデータが非公開であるため，再現はBubbleデータを持っている場合のみ実行可能である．<br>
 CIFAR-10データセットでのViT学習時には，自動的にダウンロードされるようになっているが，CUB_200_2010の学習には，事前にデータセットをダウンロードしておく必要がある．<br>
-[ここ](https://data.caltech.edu/records/65de6-vp158)からデータセットをダウンロードして任意の場所に保存してください．
--->
+[ここ](https://data.caltech.edu/records/65de6-vp158)からデータセットをダウンロードして任意の場所に保存する<br>
+また，対応するBubbleデータは，[ここ](https://github.com/yaorong0921/CUB-GHA)からダウンロードして任意の場所に保存する．
+
+#### データセットの前処理
+以下のコマンドを実行して，データを学習データと検証用データに分割する．分割の際に，各クラス毎のデータセットの枚数が異なるため，各クラス毎にN:(1-N)の割合で分割します．
+引数として`--shuffle`を与えることで，クラス毎に分割する際にデータをシャッフルしながら分割します．
+```
+python3 src/make_cub200_2011.py --N 0.8 --shuffle
+```
 
 ## Sigmoid Attention
 論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，その上でHuman in the loopによるAttentionの修正を行う．
