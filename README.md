@@ -17,9 +17,9 @@ python3 src/load_pretrained.py
 timmライブラリのソースコード/重みパラメータを使用したローカルでの動作確認は，`local_model_test.py`を実行．
 
 ### Datasetの準備
-データセットは，CIFAR-10と[CUB_200](https://www.vision.caltech.edu/datasets/cub_200_2011/)を使用する．
+データセットは，CIFAR-10と[CUB_200_2010](https://www.vision.caltech.edu/datasets/cub_200_2010/)を使用する．
 <!-- 
-CIFAR-10データセットでのViT学習時には，自動的にダウンロードされるようになっているが，CUB_200の学習には，事前にデータセットをダウンロードしておく必要がある．<br>
+CIFAR-10データセットでのViT学習時には，自動的にダウンロードされるようになっているが，CUB_200_2010の学習には，事前にデータセットをダウンロードしておく必要がある．<br>
 [ここ](https://data.caltech.edu/records/65de6-vp158)からデータセットをダウンロードして任意の場所に保存してください．
 -->
 
