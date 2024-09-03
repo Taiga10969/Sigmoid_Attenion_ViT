@@ -6,7 +6,7 @@ import random
 from tqdm import tqdm
 
 parser = argparse.ArgumentParser(description='make_cub200_2011')
-parser.add_argument('--file_path', type=str, default="./images.txt")
+parser.add_argument('--file_path', type=str, default="./datasets/CUB_200_2011/images.txt")
 parser.add_argument('--N', type=float, default=0.8)
 parser.add_argument('--shuffle', action='store_true')
 args = parser.parse_args()
