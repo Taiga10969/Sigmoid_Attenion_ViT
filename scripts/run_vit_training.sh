@@ -13,7 +13,7 @@ IS_DATAPARALLEL=false
 LR=1e-5
 OPT="adam"
 EPOCHS=100
-WANDB=true
+WANDB=false # wandbで学習進捗を確認するにはtrueに変更してapiキーを指定
 WANDB_KEY="your_api_key"
 PRETRAINED=true   # falseにすると，スクラッチからの学習
 
