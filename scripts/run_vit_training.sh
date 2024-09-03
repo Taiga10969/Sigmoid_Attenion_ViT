@@ -4,8 +4,7 @@
 PROJECTS_NAME="Sigmoid_Attention_ViT"
 RUNS_NAME="cub200_2011_FT"
 DATASET="cub200_2011" #"cub200"
-#DATASET_PATH="/taiga/share/ABN_Fine-tuning/dataset/cub200"
-DATASET_PATH='./datasets/CUB_200_2011/images'
+DATASET_PATH='./datasets/CUB_200_2011/images'　　#"ABN_Fine-tuning/dataset/cub200"
 BATCH_SIZE=128
 MODEL_NAME="vit_small_patch16_224"
 IMG_SIZE=224
