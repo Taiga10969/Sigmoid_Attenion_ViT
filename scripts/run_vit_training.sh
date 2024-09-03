@@ -2,12 +2,10 @@
 
 # ViT-Trainingの設定
 PROJECTS_NAME="Sigmoid_Attention_ViT"
-#RUNS_NAME="cifar10_FT"
 RUNS_NAME="cub200_2011_FT"
-#DATASET="cub200"
-DATASET="cub200_2011"
+DATASET="cub200_2011" #"cub200"
 #DATASET_PATH="/taiga/share/ABN_Fine-tuning/dataset/cub200"
-DATASET_PATH='/taiga/Datasets/CUB_200_2011/images'
+DATASET_PATH='./datasets/CUB_200_2011/images'
 BATCH_SIZE=128
 MODEL_NAME="vit_small_patch16_224"
 IMG_SIZE=224
@@ -16,7 +14,7 @@ LR=1e-5
 OPT="adam"
 EPOCHS=100
 WANDB=true
-WANDB_KEY="00fe025208d55e3e209f0132d63704ebc4c03b13"
+WANDB_KEY="your_api_key"
 PRETRAINED=true   # falseにすると，スクラッチからの学習
 
 # コマンド実行
