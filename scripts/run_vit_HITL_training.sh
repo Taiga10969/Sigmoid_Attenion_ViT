@@ -2,11 +2,10 @@
 
 # ViT-Trainingの設定
 PROJECTS_NAME="Sigmoid_Attention_ViT_denoise"
-#RUNS_NAME="cifar10_FT"
-RUNS_NAME="cub200_2011_HITL_denoise_lambda"
+RUNS_NAME="cub200_2011_HITL_lambda"
 DATASET="cub200_2011"
-DATASET_PATH="/taiga/Datasets/CUB_200_2011/images"
-BUBBLE_PATH="/taiga/Datasets/CUB_GHA"
+DATASET_PATH="./datasets/CUB_200_2011/images"
+BUBBLE_PATH="./datasets/CUB_GHA"
 BATCH_SIZE=128
 MODEL_NAME="vit_small_patch16_224"
 IMG_SIZE=224
@@ -15,7 +14,7 @@ LR=1e-5
 OPT="adam"
 EPOCHS=50
 WANDB=true
-WANDB_KEY="00fe025208d55e3e209f0132d63704ebc4c03b13"
+WANDB_KEY="your_api_key"
 PRETRAINED=true   # falseにすると，スクラッチからの学習
 FIRST_STEP_PRETRAIN_PTH="./results/run_cub200_2011_FT/best_acc.pt"
 #ATTN_LAMBDA=20.0
