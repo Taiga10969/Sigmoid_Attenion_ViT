@@ -42,9 +42,10 @@ python3 src/make_cub200_2011.py --N 0.8 --shuffle
 - Step2:HITL学習(Bubble Data) / Bubbleデータを用いて人の注目領域と同じ部分に注目するように追加学習
 
 ## Step1：学習(NOT Bubble Data)⚠️この先現在コード整理中（非公開）
-Bubble DataによるAttentionの学習を行う前に，通常のViTのモデルをFTして精度を確認する．
+Bubble DataによるAttentionの学習を行う前に，通常のViTのモデルをFTして精度を確認する．<br>
+以下のコマンドにより学習を開始する．wandbで学習進捗を確認するには`run_vit_trainig.sh`の`WANDB_KEY`などを適切に変更しておく必要がある．
 ```
-bash hogehoge.sh
+bash scripts/run_vit_trainig.sh
 ```
 
 ### 学習結果の確認
