@@ -31,13 +31,13 @@ timmライブラリのソースコード/重みパラメータを使用したロ
 python3 src/make_cub200_2011.py --N 0.8 --shuffle
 ```
 
-## Sigmoid Attention
-論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，Human in the loopによるAttentionの修正を行う．<br>
-これによりユーザーが0-1の範囲でAttentionの修正を行うことを可能にしている．<br>
-さらに，逆Sigmoid関数に通して元のlogitの値へと再変換して後続のSoftmax関数による処理を行うため，Attention Weightの行方向の和が1であることが担保される．<br>
-論文では，通常のDINOでの学習後に，人間がAttentionを修正したい数枚のみをアノテーションしHuman in the loopを行う．<br>
-しかし，本実験では，CUB_200_2010データとそれに対応するBubbleデータを用いて人間の注視領域と同じ部分に注目したAttentionを獲得するように学習を行う．<br>
-そのため，通常学習で人間によって理解できないAttentionにを修正するのではなく，全てのデータにおいて人間の注視領域と同じ部分に注目するように学習を行う．<br>
+## Sigmoid AttentionによるAttentionの修正機構したVision Transformer
+論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，Human in the loopによるAttentionの修正を行う．
+これによりユーザーが0-1の範囲でAttentionの修正を行うことを可能にしている．
+さらに，逆Sigmoid関数に通して元のlogitの値へと再変換して後続のSoftmax関数による処理を行うため，Attention Weightの行方向の和が1であることが担保される．
+また，論文では，通常のDINOでの学習後に，人間がAttentionを修正したい数枚のみをアノテーションしHuman in the loopを行う．<br>
+しかし，本実験では，CUB_200_2010データとそれに対応するBubbleデータを用いて人間の注視領域と同じ部分に注目したAttentionを獲得するように学習を行う．
+そのため，通常学習で人間によって理解できないAttentionにを修正するのではなく，全てのデータにおいて人間の注視領域と同じ部分に注目するように学習を行う．
 - Step1:学習(NOT Bubble Data) / 通常のFTによりモデルをデータセットにFitさせる．
 - Step2:HITL学習(Bubble Data) / Bubbleデータを用いて人の注目領域と同じ部分に注目するように追加学習
 
