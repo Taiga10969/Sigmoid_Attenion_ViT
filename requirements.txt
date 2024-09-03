@@ -1,0 +1,8 @@
+numpy==2.0.1
+timm==1.0.8
+torch==2.4.0
+torchinfo==1.8.0
+torchvision==0.19.0
+tqdm==4.66.5
+typing_extensions==4.12.2
+wandb==0.17.6
