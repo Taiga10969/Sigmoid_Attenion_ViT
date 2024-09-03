@@ -45,7 +45,7 @@ python3 src/make_cub200_2011.py --N 0.8 --shuffle
 Bubble DataによるAttentionの学習を行う前に，通常のViTのモデルをFTして精度を確認する．<br>
 以下のコマンドにより学習を開始する．wandbで学習進捗を確認するには`run_vit_trainig.sh`の`WANDB_KEY`などを適切に変更しておく必要がある．
 ```
-bash scripts/run_vit_trainig.sh
+bash scripts/run_vit_training.sh
 ```
 
 ### 学習結果の確認
