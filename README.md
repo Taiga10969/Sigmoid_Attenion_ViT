@@ -1,5 +1,5 @@
 <h3 align="center">Sigmoid_Attenion_ViT</h3>
-<!--p align="center">A Docker-powered service for PDF document layout analysis</p-->
+<!--p align="center">hogehoge</p-->
 
 ---
 MIRU2024でのポスター発表であった論文：**Sigmoid AttentionによるAttentionの修正機構を導入したDINOの提案及びHuman in the loopによる精度向上の試み**の再現実装を行う．
