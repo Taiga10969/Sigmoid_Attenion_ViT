@@ -26,7 +26,7 @@ from models.model_config import load_model_config
 parser = argparse.ArgumentParser(description='ViT-Training')
 parser.add_argument('--projects_name', type=str, default="ViT-Training")
 parser.add_argument('--runs_name', type=str, default="")
-parser.add_argument('--dataset', type=str, default='cifar10')
+parser.add_argument('--dataset', type=str, default='cub200_2011')
 parser.add_argument('--dataset_path', type=str, default='./data')
 parser.add_argument('--bubble_path', type=str, default='./')
 parser.add_argument('--batch_size', type=int, default='512')
@@ -62,8 +62,8 @@ if args.wandb == True:
                name=args.runs_name,
                config=args,
                )
-    wandb.alert(title=f"from WandB infomation project:vit_cifar10", 
-                text=f"start run vit_cifar10"
+    wandb.alert(title=f"from WandB infomation project:sigmoid attention vit", 
+                text=f"start run sigmoid attention vit"
                 )
 else:
     wandb = None
@@ -114,11 +114,7 @@ sys.stdout = logger
 
 # Dataset  ===========================================================================
 
-if args.dataset == "cifar10":
-    
-    pass
-
-elif args.dataset == "cub200":
+if args.dataset == "cub200":
 
     # 画像とバブル画像に適用するTransform
     paired_transform = PairedTransforms(
@@ -222,7 +218,6 @@ elif args.dataset == "cub200_2011":
 
 # vit_small_patch16_224 の設定
 model_config = load_model_config(num_classes, PatchEmbed, LayerNorm, Block, Mlp)
-
 model = VisionTransformer(**model_config)
 # replace
 model.blocks[-1].attn = Sigmoid_Attention(dim=model_config['embed_dim'], 
@@ -265,6 +260,8 @@ scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, args.epochs)
 # 学習 =======================================================================================
 
 train_loss_list = []
+train_logit_loss_list = []
+train_attn_loss_list = []
 test_loss_list = []
 acc_list = []
 
@@ -279,6 +276,8 @@ for epoch in range(args.epochs):
     print('\nEpoch: %d' % epoch)
     model.train()
     train_loss = 0
+    train_loss_logit = 0
+    train_loss_attn = 0
     correct = 0
     total = 0
 
@@ -318,6 +317,8 @@ for epoch in range(args.epochs):
             optimizer.step()
 
             train_loss += total_loss.item()
+            train_loss_logit += outputs_loss.item()
+            train_loss_attn += attn_loss.item()
             _, predicted = outputs.max(1)
             total += targets.size(0)
             correct += predicted.eq(targets).sum().item()
@@ -336,6 +337,9 @@ for epoch in range(args.epochs):
             train_iter += 1
         
         trainloss = train_loss/(batch_idx + 1)
+        trainloss_logit = train_loss_logit/ (batch_idx + 1)
+        trainloss_attn = train_loss_attn / (batch_idx + 1)
+        
     
     # evaluate ==================================================================================
 
@@ -392,6 +396,8 @@ for epoch in range(args.epochs):
     scheduler.step()
 
     train_loss_list.append(trainloss)
+    train_logit_loss_list.append(trainloss_logit)
+    train_attn_loss_list.append(trainloss_attn)
     test_loss_list.append(testloss)
     acc_list.append(acc)
 
@@ -404,6 +410,8 @@ for epoch in range(args.epochs):
 # 辞書にまとめる
 data = {
     'train_loss_list': train_loss_list,
+    'train_logit_loss_list': train_logit_loss_list,
+    'train_attn_loss_list': train_attn_loss_list, 
     'test_loss_list': test_loss_list,
     'acc_list': acc_list,
 }
@@ -414,14 +422,3 @@ with open(os.path.join(save_dir, f'train_data_lists.json'), 'w') as f:
 
 if args.wandb:
     wandb.finish()
-
-    
-
-
-
-
-
-
-
-
-
