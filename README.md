@@ -1,4 +1,7 @@
-# Sigmoid_Attenion_ViT
+<h3 align="center">Sigmoid_Attenion_ViT</h3>
+<!--p align="center">A Docker-powered service for PDF document layout analysis</p-->
+
+---
 MIRU2024でのポスター発表であった論文：**Sigmoid AttentionによるAttentionの修正機構を導入したDINOの提案及びHuman in the loopによる精度向上の試み**の再現実装を行う．
 論文では，DINOによる自己教師あり学習手法による評価実験を行なっており，独自の工業製品画像のデータセットを使用している(論文3.1).<br>
 そこで，公開されているデータセットを用いてSigmoid Attentionを利用したAttentionの修正機構の有効性の確認を行う．本実験で用いるCUB_200_2011データセットは，200クラスの詳細画像分類タスク用のデータセットでlabelが付与されているため，学習法はDINOではなく，通常の教師あり学習として学習し，詳細画像分類タスクにおける教師あり学習への応用を検証する．<br>
