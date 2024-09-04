@@ -56,8 +56,8 @@ if args.wandb == True:
                name=args.runs_name,
                config=args,
                )
-    wandb.alert(title=f"from WandB infomation project:vit_cifar10", 
-                text=f"start run vit_cifar10"
+    wandb.alert(title=f"from WandB infomation project:vit_train", 
+                text=f"start run vit_train"
                 )
 else:
     wandb = None
