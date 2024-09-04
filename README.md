@@ -25,11 +25,12 @@ python3 src/load_pretrained.py
 また，CUB_200_2011データセットに対応するBubbleデータは，[ここ](https://github.com/yaorong0921/CUB-GHA)からダウンロードして`./datasets`の下に置く．<br>
 
 #### データセットの前処理
-以下のコマンドを実行して，データを学習データと検証用データに分割する．分割の際に，各クラス毎のデータセットの枚数が異なるため，各クラス毎にN:(1-N)の割合で分割します．
-引数として`--shuffle`を与えることで，クラス毎に分割する際にクラス内でデータをシャッフルしながら分割します．
+以下のコマンドを実行して，データを学習データと検証用データに分割する．分割の際に，各クラス毎のデータセットの枚数が異なるため，各クラス毎にN:(1-N)の割合で分割する．
+引数として`--shuffle`を与えることで，クラス毎に分割する際にクラス内でデータをシャッフルしながら分割する．
 ```
 python3 src/make_cub200_2011.py --N 0.8 --shuffle
 ```
+これによりTrainとTextに分けられ`["img_path", label, "Bubble_data_name"]`でリスト化された`./datasets/cub200_2011_dataset.json`が保存される．
 
 ## Sigmoid AttentionによるAttentionの修正機構したVision Transformer
 論文で提案されている手法はSigmoid関数を通すことで一度0-1の範囲に正規化し，Human in the loopによるAttentionの修正を行う．
