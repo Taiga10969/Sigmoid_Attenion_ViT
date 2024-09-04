@@ -25,7 +25,7 @@ python3 src/load_pretrained.py
 ※コード上では，CUB_200_2010データセットでの実験も収録されているが，CUB_200_2010データセットのBubbleデータはprivateであるためここでは詳しく説明しない．<br>
 この先の実験進めるにはCUB_200_2011のデータセットを事前にダウンロードしておく必要がある．<br>
 [ここ](https://data.caltech.edu/records/65de6-vp158)からデータセットをダウンロードして`./datasets`の下に置く．<br>
-また，CUB_200_2011データセットに対応するBubbleデータは，[ここ](https://github.com/yaorong0921/CUB-GHA)からダウンロードして`./datasets`の下に置く．<br>
+また，対応するBubbleデータは，[ここ](https://github.com/yaorong0921/CUB-GHA)からダウンロードして`./datasets`の下に置く．<br>
 
 #### データセットの前処理
 以下のコマンドを実行して，データを学習データと検証用データに分割する．分割の際に，各クラス毎のデータセットの枚数が異なるため，各クラス毎にN:(1-N)の割合で分割する．
