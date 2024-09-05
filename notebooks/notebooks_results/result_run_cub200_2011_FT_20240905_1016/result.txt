@@ -1,0 +1,16 @@
+
+# Configuration
+model_pth = "../results/run_cub200_2011_FT/best_acc.pt"
+dataset_path = "/taiga/Datasets/CUB_200_2011/images"
+num_classes = 200
+dataset = "cub200_2011"
+
+# Result
+Top-1 Accuracy : 0.8121
+Top-2 Accuracy : 0.8964
+Top-3 Accuracy : 0.9305
+Top-4 Accuracy : 0.9465
+Top-5 Accuracy : 0.9570
+MPP (mean) = 0.7180
+MPP (max) = 0.9992
+MPP (min) = 0.0000
