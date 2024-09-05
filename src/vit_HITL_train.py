@@ -9,8 +9,6 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from timm.layers import Mlp, PatchEmbed
-from torch.nn import LayerNorm
 from torch.nn.utils import clip_grad_norm_
 from torchvision import datasets, transforms
 from tqdm import tqdm
@@ -18,9 +16,7 @@ from tqdm import tqdm
 from datasets.cub200_2010_dataset import ImageBubbleFolder
 from datasets.cub200_2011_dataset import CUB2011_BubbleDataset, CUB2011_Dataset
 from datasets.paired_transforms import (PairedTransforms, RandomHorizontalFlipPair, RandomCropPair, ResizePair)
-from models.sigmoid_attention import Sigmoid_Attention
-from models.vit import Block, VisionTransformer
-from models.model_config import load_model_config
+from models.load_model import load_Sigmoid_Attention_model
 
 
 parser = argparse.ArgumentParser(description='ViT-Training')
@@ -208,22 +204,9 @@ elif args.dataset == "cub200_2011":
 
     num_classes = 200
 
-
-
-
-
-
-
 # Model の定義 ==============================================================
 
-# vit_small_patch16_224 の設定
-model_config = load_model_config(num_classes, PatchEmbed, LayerNorm, Block, Mlp)
-model = VisionTransformer(**model_config)
-# replace
-model.blocks[-1].attn = Sigmoid_Attention(dim=model_config['embed_dim'], 
-                                          num_heads=model_config['num_heads'], 
-                                          qkv_bias=model_config['qkv_bias']
-                                          )
+model = load_Sigmoid_Attention_model(model_type='type1', num_classes=num_classes)
 
 if args.pretrained:
     state_dict = torch.load('./models/vit_small_patch16_224.pt', map_location=torch.device('cpu'), weights_only=True)
@@ -296,7 +279,7 @@ for epoch in range(args.epochs):
             bubbles = bubbles.reshape(bs, 1, -1)
             bubbles = bubbles.repeat(1, 6, 1)
             #bubbles = bubbles*0.9
-            bubbles[bubbles != 0] = -1 #bubbleデータが0以外の部分は無視：ノイズを消す方向性
+            #bubbles[bubbles != 0] = -1 #bubbleデータが0以外の部分は無視：ノイズを消す方向性
 
             #print("loss : ", loss)
             sigmoid_att = torch.sigmoid(attention)
