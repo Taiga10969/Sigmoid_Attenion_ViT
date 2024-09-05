@@ -56,8 +56,8 @@ if args.wandb == True:
                name=args.runs_name,
                config=args,
                )
-    wandb.alert(title=f"from WandB infomation project:vit_train", 
-                text=f"start run vit_train"
+    wandb.alert(title=f"from WandB infomation project:sigmoid attention vit", 
+                text=f"start run sigmoid attention vit"
                 )
 else:
     wandb = None
@@ -325,14 +325,3 @@ with open(os.path.join(save_dir, f'train_data_lists.json'), 'w') as f:
 
 if args.wandb:
     wandb.finish()
-
-    
-
-
-
-
-
-
-
-
-
