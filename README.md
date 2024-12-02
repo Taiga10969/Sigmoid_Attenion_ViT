@@ -63,5 +63,8 @@ bash scripts/run_vit_training.sh
 bash scripts/run_vit_HITL_training.sh
 ```
 
+### 実験結果 (Results)
+これらの実験をまとめたスライドは，[ここ](http://www.mprg.cs.chubu.ac.jp/~masudataiga/Research/Document_Data/Discussion_M1/Discussion_M1_12/Discussion_M1_12_slide.pdf)から閲覧可能です．（研究室内メンバーのみログインして閲覧可能です．）
+
 ## References
 [1] 松本悠希, 尾澤知憲, 奥野拓也, 三浦勝司, *"Sigmoid AttentionによるAttention修正機構を導入したDINOの性能評価"*, 信学技報, PRMU2024-9, pp. 7-12, 2024.
