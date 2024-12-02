@@ -1,6 +1,6 @@
 <h1 align="center">Sigmoid_Attenion_ViT</h1>
 <!--p align="center">hogehoge</p-->
-MIRU2024でのポスター発表であった論文：**Sigmoid AttentionによるAttentionの修正機構を導入したDINOの提案及びHuman in the loopによる精度向上の試み**の再現実装を行う．
+このレポジトリは，Sigmoid AttentionによるAttentionの修正機構を導入したDINOの提案及びHuman in the loopによる精度向上の試み (松本ら [1])を教師あり学習に応用した手法の実装である．
 論文では，DINOによる自己教師あり学習手法による評価実験を行なっており，独自の工業製品画像のデータセットを使用している(論文3.1).<br>
 そこで，公開されているデータセットを用いてSigmoid Attentionを利用したAttentionの修正機構の有効性の確認を行う．本実験で用いるCUB_200_2011データセットは，200クラスの詳細画像分類タスク用のデータセットでlabelが付与されているため，学習法はDINOではなく，通常の教師あり学習として学習し，詳細画像分類タスクにおける教師あり学習への応用を検証する．<br>
 
@@ -57,3 +57,8 @@ bash scripts/run_vit_training.sh
 このファイルを実行すると，`./result./result%Y%m%d_%H%M`の形式で結果画像が保存されます．-->
 
 ## Step2:HITL学習(Bubble Data)
+
+
+
+## References
+[1] 松本悠希, 尾澤知憲, 奥野拓也, 三浦勝司, *"Sigmoid AttentionによるAttention修正機構を導入したDINOの性能評価"*, 信学技報, PRMU2024-9, pp. 7-12, 2024.
