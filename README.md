@@ -58,8 +58,10 @@ bash scripts/run_vit_training.sh
 
 ## Step2:HITL学習(Bubble Data)
 次にBubble Dataを含めた学習を行う．<br>
-以下のコマンドにより学習を開始する．wandbで学習進捗を確認するには`run_vit_trainig.sh`の`WANDB_KEY`などを適切に変更しておく必要がある．
-
+以下のコマンドにより学習を開始する．wandbで学習進捗を確認するには`run_vit_HITL_training.sh`の`WANDB_KEY`などを適切に変更しておく必要がある．
+```
+bash scripts/run_vit_HITL_training.sh
+```
 
 ## References
 [1] 松本悠希, 尾澤知憲, 奥野拓也, 三浦勝司, *"Sigmoid AttentionによるAttention修正機構を導入したDINOの性能評価"*, 信学技報, PRMU2024-9, pp. 7-12, 2024.
