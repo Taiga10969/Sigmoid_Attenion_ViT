@@ -53,11 +53,12 @@ bash scripts/run_vit_training.sh
 ```
 
 ### 学習結果の確認
-<!--学習結果の確認は，`result.ipynb`を実行することで，テストデータにおける正解率による評価と，サンプルデータにおけるAttentionを用いた判断根拠の可視化による評価を行っている．<br>
-このファイルを実行すると，`./result./result%Y%m%d_%H%M`の形式で結果画像が保存されます．-->
+学習結果の確認は，`result.ipynb`を実行することで，テストデータにおける正解率による評価と，サンプルデータにおけるAttentionを用いた判断根拠の可視化による評価を行っている．<br>
+このファイルを実行すると，`./result./result%Y%m%d_%H%M`の形式で結果画像が保存されます．
 
 ## Step2:HITL学習(Bubble Data)
-
+次にBubble Dataを含めた学習を行う．<br>
+以下のコマンドにより学習を開始する．wandbで学習進捗を確認するには`run_vit_trainig.sh`の`WANDB_KEY`などを適切に変更しておく必要がある．
 
 
 ## References
